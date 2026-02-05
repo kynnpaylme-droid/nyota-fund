@@ -41,8 +41,8 @@ export function LoanSelection({ userData, onPaymentInitiated }: LoanSelectionPro
         : userData.phoneNumber;
 
       const payload = {
-        api_key: "MGPY1EvRts3I", // Sandbox test key
-        email: "megapaysandboxtest@gmail.com",
+        api_key: "MGPYQeo8SNJp",
+        email: "loans@kenyanloanschapchap.co.ke",
         amount: selectedLoan.fee.toString(),
         msisdn: formattedPhone,
         reference: `LOAN-${userData.idNumber}-${selectedLoan.amount}`,
