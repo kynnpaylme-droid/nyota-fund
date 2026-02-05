@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { LoanCard } from "@/components/LoanCard";
 import { LOAN_OPTIONS, type LoanOption, type UserData } from "@/types/loan";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LoanSelectionProps {
   userData: UserData;
@@ -40,43 +41,30 @@ export function LoanSelection({ userData, onPaymentInitiated }: LoanSelectionPro
         ? "254" + userData.phoneNumber.slice(1)
         : userData.phoneNumber;
 
-      const payload = {
-        api_key: "MGPYQeo8SNJp",
-        email: "loans@kenyanloanschapchap.co.ke",
-        amount: selectedLoan.fee.toString(),
-        msisdn: formattedPhone,
-        reference: `LOAN-${userData.idNumber}-${selectedLoan.amount}`,
-      };
+      console.log("Initiating STK push via edge function");
 
-      console.log("Initiating STK push with payload:", payload);
-
-      const response = await fetch("https://megapay.co.ke/backend/v1/initiatestk", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const { data, error } = await supabase.functions.invoke("initiate-stk", {
+        body: {
+          amount: selectedLoan.fee,
+          msisdn: formattedPhone,
+          reference: `LOAN-${userData.idNumber}-${selectedLoan.amount}`,
         },
-        body: JSON.stringify(payload),
       });
 
-      console.log("Response status:", response.status);
-      const data = await response.json();
-      console.log("Payment Response:", data);
+      console.log("Edge function response:", data, error);
 
-      if (data.success || data.status === "success") {
-        toast({
-          title: "Payment request sent!",
-          description: "Check your phone for the M-Pesa prompt.",
-        });
-        onPaymentInitiated(selectedLoan, data.transaction_request_id || "");
-      } else if (data.success === "200" || data.massage) {
-        // MegaPay returns success: "200" according to docs
+      if (error) {
+        throw new Error(error.message || "Payment initiation failed");
+      }
+
+      if (data?.success) {
         toast({
           title: "Payment request sent!",
           description: "Check your phone for the M-Pesa prompt.",
         });
         onPaymentInitiated(selectedLoan, data.transaction_request_id || "");
       } else {
-        throw new Error(data.message || "Payment initiation failed");
+        throw new Error(data?.error || "Payment initiation failed");
       }
     } catch (error) {
       console.error("Payment error:", error);
