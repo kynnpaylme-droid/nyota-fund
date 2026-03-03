@@ -46,6 +46,7 @@ const Index = () => {
               <div className="mt-8">
                 <TrustBadges />
               </div>
+              <Testimonials />
             </>
           )}
 
