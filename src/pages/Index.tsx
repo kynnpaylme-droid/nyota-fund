@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StepIndicator } from "@/components/StepIndicator";
 import { TrustBadges } from "@/components/TrustBadges";
+import { Testimonials } from "@/components/Testimonials";
 import { EligibilityForm } from "@/components/EligibilityForm";
 import { LoanSelection } from "@/components/LoanSelection";
 import { PaymentSuccess } from "@/components/PaymentSuccess";
