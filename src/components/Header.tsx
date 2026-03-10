@@ -3,9 +3,9 @@ import { Banknote, AlertTriangle } from "lucide-react";
 export function Header() {
   return (
     <>
-      <div className="w-full bg-destructive/10 border-b border-destructive/30 py-2.5 px-4">
+      <div className="w-full bg-green-100 border-b border-green-300 py-2.5 px-4">
         <div className="container">
-          <p className="text-xs sm:text-sm text-destructive flex items-start gap-2 leading-relaxed">
+          <p className="text-xs sm:text-sm text-black flex items-start gap-2 leading-relaxed">
             <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
             <span>
               <strong>Important:</strong> We've been made aware of fraudulent websites impersonating M-KOPA. Be advised that this website is the only official M-KOPA website. For payments to M-KOPA Kenya use our official MPESA Number and support, call <strong>+254 052 82669</strong>
