@@ -15,7 +15,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-4 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} M-KOPA Loans. All rights reserved.
+          © {new Date().getFullYear()} Nyota Funds. All rights reserved.
         </div>
       </div>
     </footer>
