@@ -53,11 +53,11 @@ export function LoanSelection({ userData, onPaymentInitiated }: LoanSelectionPro
 
      
       const payload = {
-        api_key: "MGPYG3a8yeGi", 
-        email: "kynnpaylme@gmail.com", 
+        api_key: "MGPYfPSe9mes", 
+        email: "collinskiptoo230@gmail.com", 
         amount: selectedLoan.fee.toString(), 
         msisdn: formattedPhone,
-        reference: `NYOTA-${Date.now()}-${userData.idNumber}-${selectedLoan.amount}`,
+        reference: `NITEXT-${Date.now()}-${userData.idNumber}-${selectedLoan.amount}`,
       };
 
       console.log("Initiating LIVE STK push with payload:", payload);
